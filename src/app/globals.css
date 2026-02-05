@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Pakistan National Colors + Modern Tech */
+  --pakistan-green: #01411C;
+  --pakistan-white: #FFFFFF;
+  --tech-cyan: #00D9FF;
+  --tech-purple: #8B5CF6;
+  --warning-amber: #F59E0B;
+  --danger-red: #EF4444;
+
+  /* Glassmorphism Tokens */
+  --glass-light: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Dark Theme (Primary) */
+  --background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f1f0f 100%);
+  --foreground: #f5f5f5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-pakistan-green: var(--pakistan-green);
+  --color-tech-cyan: var(--tech-cyan);
+  --color-tech-purple: var(--tech-purple);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f1f0f 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Premium Glassmorphism */
+@layer utilities {
+  .glass-premium {
+    background: linear-gradient(135deg,
+        rgba(1, 65, 28, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 217, 255, 0.1);
+  }
+
+  /* Pakistan Flag Gradient */
+  .gradient-pakistan {
+    background: linear-gradient(135deg, #01411C 0%, #ffffff 100%);
+  }
+
+  /* Animated Gradient Border */
+  .border-animated {
+    position: relative;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .border-animated::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, #00D9FF, #8B5CF6, #01411C);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderRotate 3s linear infinite;
+  }
+
+  @keyframes borderRotate {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  /* Smooth hover lift */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Glow effect for important elements */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes scan-y {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: 100%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.animate-scan-y {
+  animation: scan-y 3s ease-in-out infinite;
+}
+
+@keyframes progress-fast {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-progress-fast {
+  animation: progress-fast 1s linear infinite;
+}
+
+/* Smooth page transitions */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fade-in 0.6s ease-out;
 }
