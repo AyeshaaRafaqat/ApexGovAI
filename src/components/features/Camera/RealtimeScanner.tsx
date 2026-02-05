@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-export function RealtimeScanner({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement> }) {
+export function RealtimeScanner({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement | null> }) {
     const [model, setModel] = useState<any>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isLoaded, setIsLoaded] = useState(false);
